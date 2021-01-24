@@ -571,7 +571,7 @@ header .go-back i {
 
 .bg-cover .container {
     position: relative;
-    color: #fff;
+    color: rgb(247, 6, 186);
     z-index: 2;
 }
 
@@ -586,7 +586,7 @@ header .go-back i {
     font-weight: 300;
     font-size: 1.25rem;
     line-height: 1.4em;
-    color: #eee;
+    color: rgb(19, 8, 83);
 }
 
 .bg-cover .post-title {
