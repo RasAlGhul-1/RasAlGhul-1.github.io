@@ -571,7 +571,7 @@ header .go-back i {
 
 .bg-cover .container {
     position: relative;
-    color: rgb(247, 6, 186);
+    color: rgb(0, 0, 0);
     z-index: 2;
 }
 
@@ -583,7 +583,7 @@ header .go-back i {
 }
 
 .bg-cover .description {
-    font-weight: 300;
+    font-weight: bolder;
     font-size: 1.25rem;
     line-height: 1.4em;
     color: rgb(19, 8, 83);
