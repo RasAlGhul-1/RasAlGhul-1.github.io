@@ -28,6 +28,9 @@
     <link rel="stylesheet" type="text/css" href="/css/my.css">
 
     <script src="/libs/jquery/jquery.min.js"></script>
+    <!--打字效果-->
+    <script src="/js/typed.js"></script>
+    
     <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
 
 <meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Ra's_Al_Ghul" type="application/atom+xml">
@@ -322,7 +325,32 @@
 
             <div class="description center-align">
                 
-                    <span id="jinrishici-sentence">正在加载今日诗词....</span>
+                    <span id="shici"></span>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+<script type="text/javascript">
+      jinrishici.load(function(result) {
+                    // 自己的处理逻辑
+                    content = result.data.origin.content,
+                    title =  result.data.origin.title,
+                    dynasty = result.data.origin.dynasty,
+                    author = result.data.origin.author,
+                    info = '《'+title+'》'+'【'+dynasty+'】'+author
+                    pre=[]
+                    for (var key in content){
+                         pre.push(content[key])
+                    }
+                    pre.push(info)
+                     var typed = new Typed("#shici", {
+                        strings: pre,
+                        startDelay: 300,
+                        typeSpeed: 100,
+                        loop: true,
+                        backSpeed: 50,
+                        showCursor: true
+                    });
+                  });
+</script>
                 
             </div>
         </div>

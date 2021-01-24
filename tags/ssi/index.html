@@ -28,6 +28,9 @@
     <link rel="stylesheet" type="text/css" href="/css/my.css">
 
     <script src="/libs/jquery/jquery.min.js"></script>
+    <!--打字效果-->
+    <script src="/js/typed.js"></script>
+    
     <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
 
 <meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Ra's_Al_Ghul" type="application/atom+xml">
@@ -322,7 +325,32 @@
 
             <div class="description center-align">
                 
-                    <span id="jinrishici-sentence">正在加载今日诗词....</span>
+                    <span id="shici"></span>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+<script type="text/javascript">
+      jinrishici.load(function(result) {
+                    // 自己的处理逻辑
+                    content = result.data.origin.content,
+                    title =  result.data.origin.title,
+                    dynasty = result.data.origin.dynasty,
+                    author = result.data.origin.author,
+                    info = '《'+title+'》'+'【'+dynasty+'】'+author
+                    pre=[]
+                    for (var key in content){
+                         pre.push(content[key])
+                    }
+                    pre.push(info)
+                     var typed = new Typed("#shici", {
+                        strings: pre,
+                        startDelay: 300,
+                        typeSpeed: 100,
+                        loop: true,
+                        backSpeed: 50,
+                        showCursor: true
+                    });
+                  });
+</script>
                 
             </div>
         </div>
@@ -405,28 +433,10 @@
                 </a>
                 
                 
-                <a href="/tags/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A/" title="目录穿越: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="目录穿越" style="background-color: #82E0AA;">目录穿越
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" title="文件包含: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="文件包含" style="background-color: #D7BDE2;">文件包含
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
                 <a href="/tags/ssi/" title="ssi: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-active "
-                            data-tagname="ssi" style="background-color: #A3E4D7;">ssi
+                            data-tagname="ssi" style="background-color: #82E0AA;">ssi
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -435,7 +445,25 @@
                 <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" title="命令执行: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            data-tagname="命令执行" style="background-color: #85C1E9;">命令执行
+                            data-tagname="命令执行" style="background-color: #D7BDE2;">命令执行
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A/" title="目录穿越: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="目录穿越" style="background-color: #A3E4D7;">目录穿越
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" title="文件包含: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="文件包含" style="background-color: #85C1E9;">文件包含
                         <span class="tag-length">1</span>
                     </span>
                 </a>
