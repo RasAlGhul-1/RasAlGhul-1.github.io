@@ -17,8 +17,6 @@
           
           <category> 刷题记录 </category>
           
-          <category> buu刷题记录 </category>
-          
           <category> 《从0到1：CTFer成长之路》配套题目 </category>
           
       </categories>
@@ -110,8 +108,6 @@
           
           <category> 刷题记录 </category>
           
-          <category> ctfhub刷题记录 </category>
-          
           <category> 《从0到1：CTFer成长之路》配套题目 </category>
           
       </categories>
@@ -141,8 +137,6 @@
           
           <category> 刷题记录 </category>
           
-          <category> ctfhub刷题记录 </category>
-          
           <category> 《从0到1：CTFer成长之路》配套题目 </category>
           
       </categories>
@@ -171,8 +165,6 @@
           <category> web安全 </category>
           
           <category> 刷题记录 </category>
-          
-          <category> ctfhub刷题记录 </category>
           
           <category> 《从0到1：CTFer成长之路》配套题目 </category>
           
@@ -205,8 +197,6 @@
           
           <category> 刷题记录 </category>
           
-          <category> ctfhub刷题记录 </category>
-          
           <category> 《从0到1：CTFer成长之路》配套题目 </category>
           
       </categories>
@@ -235,8 +225,6 @@
           <category> web安全 </category>
           
           <category> 刷题记录 </category>
-          
-          <category> ctfhub刷题记录 </category>
           
           <category> 《从0到1：CTFer成长之路》配套题目 </category>
           
@@ -276,9 +264,9 @@
       
         <tags>
             
-            <tag> buu刷题记录 </tag>
-            
             <tag> sql注入 </tag>
+            
+            <tag> buu刷题记录 </tag>
             
             <tag> 堆叠注入 </tag>
             
