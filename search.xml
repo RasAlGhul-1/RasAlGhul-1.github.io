@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>Tomcat8+_Weak_Password_&amp;&amp;_Backend_Getshell_Vulnerability</title>
+      <link href="/blog/2021/02/11/tomcat8-weak-password-backend-getshell-vulnerability/"/>
+      <url>/blog/2021/02/11/tomcat8-weak-password-backend-getshell-vulnerability/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Tomcat-Tomcat8-Weak-Password-amp-amp-Backend-Getshell-Vulnerability"><a href="#Tomcat-Tomcat8-Weak-Password-amp-amp-Backend-Getshell-Vulnerability" class="headerlink" title="[Tomcat]Tomcat8+ Weak Password &amp;&amp; Backend Getshell Vulnerability"></a>[Tomcat]Tomcat8+ Weak Password &amp;&amp; Backend Getshell Vulnerability</h1><p>复现地址buu的real区</p><p>年三十晚上又来刷题了。然后发现这是第一次团队考核的题。。。所以直接秒。后续再深入了解一下再做补充</p><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><img src="https://i.loli.net/2021/02/11/aH9oqs6GblfYgp3.png" alt="题目"></p><h2 id="弱口令登录"><a href="#弱口令登录" class="headerlink" title="弱口令登录"></a>弱口令登录</h2><p>一番尝试后</p><p><code>tomcat:tomcat</code>成功登录</p><p>有点熟悉的感觉</p><h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><p>登录后发现上传点。</p><p><img src="https://i.loli.net/2021/02/11/KZld6M2bpCAYU5w.png" alt="上传点"></p><p>然后。。。就想到了团队第一次考核的题就是和这个环境一样</p><p>嗯。压缩小马1.jsp为1.zip，然后将后缀名zip改为war进行上传。一波带走</p><p><img src="https://i.loli.net/2021/02/11/IoBEf8J97Sbzl6y.png" alt="上传小马"></p><h2 id="列目录"><a href="#列目录" class="headerlink" title="列目录"></a>列目录</h2><p><img src="https://i.loli.net/2021/02/11/ugMOIUStbcznsmQ.png" alt="列目录"></p><h2 id="拿flag"><a href="#拿flag" class="headerlink" title="拿flag"></a>拿flag</h2><p>有了上午做的那到tomcat命令执行后。直接env吧</p><p><img src="https://i.loli.net/2021/02/11/oA7zGKYui5VQt18.png" alt="flag"></p><p><strong>溜了溜了，刷手机看春晚，后续会补上这道题的分析及相关细节</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> web安全 </category>
+          
+          <category> 刷题记录 </category>
+          
+          <category> buu刷题记录 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> buu刷题记录 </tag>
+            
+            <tag> Tomcat </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Tomcat-CVE-2017-12615</title>
       <link href="/blog/2021/02/11/tomcat-cve-2017-12615/"/>
       <url>/blog/2021/02/11/tomcat-cve-2017-12615/</url>
@@ -27,6 +58,10 @@
             <tag> buu刷题记录 </tag>
             
             <tag> CVE-2017-12615 </tag>
+            
+            <tag> PUT上传 </tag>
+            
+            <tag> Tomcat </tag>
             
         </tags>
       
