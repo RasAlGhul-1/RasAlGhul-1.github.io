@@ -235,6 +235,13 @@
   </url>
   
   <url>
+    <loc>https://rasalghul-1.github.io/tags/Tomcat/</loc>
+    <lastmod>2021-02-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://rasalghul-1.github.io/tags/CVE-2017-12615/</loc>
     <lastmod>2021-02-13</lastmod>
     <changefreq>daily</changefreq>
@@ -243,13 +250,6 @@
   
   <url>
     <loc>https://rasalghul-1.github.io/tags/PUT%E4%B8%8A%E4%BC%A0/</loc>
-    <lastmod>2021-02-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://rasalghul-1.github.io/tags/Tomcat/</loc>
     <lastmod>2021-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -293,14 +293,14 @@
   </url>
   
   <url>
-    <loc>https://rasalghul-1.github.io/categories/web%E5%AE%89%E5%85%A8/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/ctfhub%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</loc>
+    <loc>https://rasalghul-1.github.io/categories/web%E5%AE%89%E5%85%A8/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/buu%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2021-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://rasalghul-1.github.io/categories/web%E5%AE%89%E5%85%A8/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/buu%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</loc>
+    <loc>https://rasalghul-1.github.io/categories/web%E5%AE%89%E5%85%A8/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/ctfhub%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2021-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
