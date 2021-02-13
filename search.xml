@@ -4,6 +4,41 @@
   
     
     <entry>
+      <title>Nginx-CVE-2013-4547</title>
+      <link href="/blog/2021/02/13/nginx-cve-2013-4547/"/>
+      <url>/blog/2021/02/13/nginx-cve-2013-4547/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Nginx-CVE-2013-4547"><a href="#Nginx-CVE-2013-4547" class="headerlink" title="[Nginx]CVE-2013-4547"></a>[Nginx]CVE-2013-4547</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><img src="https://i.loli.net/2021/02/13/dmirFp3CejDsLBG.png" alt="题目"></p><p>入口就是个文件上传</p><h2 id="CVE-2013-4547"><a href="#CVE-2013-4547" class="headerlink" title="CVE-2013-4547"></a>CVE-2013-4547</h2><p>附上其他师傅发过的分享：<a href="https://www.cnblogs.com/bmjoker/p/9838600.html">https://www.cnblogs.com/bmjoker/p/9838600.html</a></p><h2 id="利用"><a href="#利用" class="headerlink" title="利用"></a>利用</h2><h3 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h3><p>上传文件后缀可以为白名单文件后缀接一个空格。如<code>1.jpg </code>,<code>2.gif</code>都可以成功上传</p><p><img src="https://i.loli.net/2021/02/13/nzGtSRsJCrhjpcT.png" alt="2.png"></p><p>这里我们上传一个phpinfo</p><h3 id="抓包修改"><a href="#抓包修改" class="headerlink" title="抓包修改"></a>抓包修改</h3><p>访问<code>http://xxx/uploadfiles/cmd.jpg  .php</code></p><p>然后抓包将两个空格中第二个20修改为00。</p><p><img src="https://i.loli.net/2021/02/13/Nn2WvlOmrUFa8gZ.png" alt="3.png"></p><p>放包回去可以发现成功解析</p><p><img src="https://i.loli.net/2021/02/13/XnihS8eaAcwjIHJ.png" alt="4.png"></p><h3 id="拿flag"><a href="#拿flag" class="headerlink" title="拿flag"></a>拿flag</h3><p>直接搜索flag即可找到</p><p><img src="https://i.loli.net/2021/02/13/1BlWgAjbxIaCsM4.png" alt="5.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> web安全 </category>
+          
+          <category> 刷题记录 </category>
+          
+          <category> buu刷题记录 </category>
+          
+          <category> real分区 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> buu刷题记录 </tag>
+            
+            <tag> CVE-2013-4547 </tag>
+            
+            <tag> Nginx </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Tomcat8+_Weak_Password_&amp;&amp;_Backend_Getshell_Vulnerability</title>
       <link href="/blog/2021/02/11/tomcat8-weak-password-backend-getshell-vulnerability/"/>
       <url>/blog/2021/02/11/tomcat8-weak-password-backend-getshell-vulnerability/</url>
@@ -18,6 +53,8 @@
           <category> 刷题记录 </category>
           
           <category> buu刷题记录 </category>
+          
+          <category> real分区 </category>
           
       </categories>
       
@@ -49,6 +86,8 @@
           <category> 刷题记录 </category>
           
           <category> buu刷题记录 </category>
+          
+          <category> real分区 </category>
           
       </categories>
       
@@ -330,9 +369,9 @@
       
         <tags>
             
-            <tag> sql注入 </tag>
-            
             <tag> buu刷题记录 </tag>
+            
+            <tag> sql注入 </tag>
             
             <tag> 堆叠注入 </tag>
             
