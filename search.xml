@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>N1Book-第三章-web进阶-逻辑漏洞</title>
+      <link href="/blog/2021/03/02/n1book-di-san-zhang-web-jin-jie-luo-ji-lou-dong/"/>
+      <url>/blog/2021/03/02/n1book-di-san-zhang-web-jin-jie-luo-ji-lou-dong/</url>
+      
+        <content type="html"><![CDATA[<h1 id="第三章-web进阶-逻辑漏洞"><a href="#第三章-web进阶-逻辑漏洞" class="headerlink" title="[第三章 web进阶]逻辑漏洞"></a>[第三章 web进阶]逻辑漏洞</h1><p>一道简单的逻辑漏洞题。大佬合上叭</p><h2 id="入口"><a href="#入口" class="headerlink" title="入口"></a>入口</h2><p><img src="https://i.loli.net/2021/03/02/uAKQYtVLJaWUmRE.png" alt="入口"></p><p>随便输账号密码登录即可</p><h2 id="登录后"><a href="#登录后" class="headerlink" title="登录后"></a>登录后</h2><p><img src="https://i.loli.net/2021/03/02/SFRmptfHUbeLM3i.png" alt="登陆后"></p><p>典型购买flag钱不够套路</p><h2 id="尝试各个点"><a href="#尝试各个点" class="headerlink" title="尝试各个点"></a>尝试各个点</h2><h3 id="购买价格低的物品"><a href="#购买价格低的物品" class="headerlink" title="购买价格低的物品"></a>购买价格低的物品</h3><p><img src="https://i.loli.net/2021/03/02/E2uIrFiNwPjB1Rv.png" alt="瞎尝试"></p><p>发现能够购买。但无卵用（bu shi）</p><h3 id="购买flag"><a href="#购买flag" class="headerlink" title="购买flag"></a>购买flag</h3><p><img src="https://i.loli.net/2021/03/02/PlgLV5Uv6mcsN8J.png" alt="买flag"></p><p>买的到还做🔨</p><h2 id="尝试几种购买功能点基操"><a href="#尝试几种购买功能点基操" class="headerlink" title="尝试几种购买功能点基操"></a>尝试几种购买功能点基操</h2><h3 id="0元购flag"><a href="#0元购flag" class="headerlink" title="0元购flag"></a>0元购flag</h3><p><img src="https://i.loli.net/2021/03/02/9u7RNYws2yCIvlW.png" alt="0元购"></p><h3 id="负数购买flag"><a href="#负数购买flag" class="headerlink" title="负数购买flag"></a>负数购买flag</h3><p><img src="https://i.loli.net/2021/03/02/9u7RNYws2yCIvlW.png" alt="负数购买"></p><p>可以发现直接买flag都不行</p><p>所以尝试买低价物品来操作。但最终目标是拿flag。所以还是要使自己的钱大于2000才行</p><p>分析结束，开搞👇</p><h3 id="负数购买低价物品（反向花钱）"><a href="#负数购买低价物品（反向花钱）" class="headerlink" title="负数购买低价物品（反向花钱）"></a>负数购买低价物品（反向花钱）</h3><p><img src="https://i.loli.net/2021/03/02/zMIkbtCOL5YXS6i.png" alt="反向花钱"></p><p>这波是直接给自己加2k块钱</p><h3 id="愉快拿flag"><a href="#愉快拿flag" class="headerlink" title="愉快拿flag"></a>愉快拿flag</h3><p><img src="https://i.loli.net/2021/03/02/DMnLlPqOwko2bNu.png" alt="flag"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> web安全 </category>
+          
+          <category> 刷题记录 </category>
+          
+          <category> 《从0到1：CTFer成长之路》配套题目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 逻辑漏洞 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Nginx-CVE-2013-4547</title>
       <link href="/blog/2021/02/13/nginx-cve-2013-4547/"/>
       <url>/blog/2021/02/13/nginx-cve-2013-4547/</url>
@@ -369,9 +398,9 @@
       
         <tags>
             
-            <tag> sql注入 </tag>
-            
             <tag> buu刷题记录 </tag>
+            
+            <tag> sql注入 </tag>
             
             <tag> 堆叠注入 </tag>
             
